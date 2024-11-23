@@ -1,8 +1,8 @@
 :root {
-    --primario: #2b5ab8;
-    --primarioOscuro: #2d4067;
-    --secundario: #fbbb55;
-    --secundarioOscuro: rgb(251, 187, 85);
+    --primario: #89119D;
+    --primarioOscuro: #9c27b0;
+    --secundario: #ffce00;
+    --secundarioOscuro: rgb(233, 287, 2);
     --blanco: #fff;
     --negro: #212121;
 
@@ -73,27 +73,31 @@ h3 {
 }
 
 /**Header **/
+/* Ajustes para el header */
 .header {
     display: flex;
+    align-items: center;
+    /* Centra el contenido verticalmente */
     justify-content: center;
+    /* Centra el título horizontalmente */
+    padding: 1rem;
 }
 
-.header__logo {
-    width: 20rem;
-    height: auto;
-    margin: 3rem 0;
-}
-
-.header__logo {
-    width: 150px;
-    /* Tamaño inicial del logo */
+/* Estilo para el título (enlace) */
+.header h1 {
+    font-size: 8rem;
+    /* Ajusta el tamaño del texto */
+    margin: 0;
     transition: transform 0.3s ease;
-    /* Transición suave */
+    /* Transición para el efecto hover */
+    cursor: pointer;
+    /* Cambia el cursor para indicar que es clickeable */
 }
 
-.header__logo:hover {
+/* Efecto hover para el título */
+.header h1:hover {
     transform: scale(1.1);
-    /* Aumenta el tamaño al 110% */
+    /* Aumenta el tamaño al pasar el cursor */
 }
 
 /**Footer**/
@@ -143,51 +147,117 @@ h3 {
 }
 
 /**Productos **/
+.productos__contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    /* Permite que los elementos se ajusten en varias filas si es necesario */
+    gap: 20px;
+    /* Espacio entre las cards */
+    justify-content: center;
+    /* Centra las cards horizontalmente */
+}
+
 .producto {
     background-color: var(--primarioOscuro);
-    padding: 1rem;
-}
-
-.producto__imagen {
-    width: 100%;
-}
-
-/*.producto__informacion {}*/
-
-.producto__nombre {
-    font-size: 4rem;
-}
-
-.producto__precio {
-    font-size: 2.8rem;
-    color: var(--secundario);
-}
-
-.producto__nombre,
-.producto__precio {
-    font-family: var(--fuentePrincipal);
-    margin: 1rem 0;
+    /* Fondo de cada card */
+    border: 1px solid var(--primarioOscuro);
+    border-radius: 8px;
+    width: 300px;
+    /* Tamaño fijo para las cards */
     text-align: center;
-    line-height: 1.2;
+    /* Centra el texto dentro de cada card */
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
-/** Graficos **/
-.grafico {
-    min-height: 30rem;
-    background-repeat: no-repeat;
-    background-size: cover;
-    grid-column: 1 / 3;
+.producto:hover {
+    transform: scale(1.05);
+    /* Pequeño zoom al pasar el cursor */
 }
 
-.grafico--camisas {
-    grid-row: 2 / 3;
-    background-image: url(../img/grafico1.jpg);
+.producto__descripcion {
+    color: var(--negro);
+    font-family: var(--fuentePrincipal);
+    font-size: 3rem;
+
 }
 
-.grafico--node {
-    background-image: url(../img/grafico2.jpg);
-    grid-row: 8 / 9;
+/**Camisa */
+.camisa__imagen {
+    width: 40rem;
+    height: auto;
+
 }
+
+/** Reseñas **/
+.resenas {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    /* Fondo neutro */
+    border-radius: 10px;
+}
+
+.resenas__titulo {
+    font-family: var(--fuentePrincipal);
+    /* Consistente con tu tema */
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--negro);
+    /* Azul noche */
+    margin-bottom: 20px;
+}
+
+.resenas__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Distribución responsiva */
+    gap: 20px;
+    justify-content: center;
+}
+
+.resena {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resena:hover {
+    transform: translateY(-5px);
+    /* Pequeño efecto de elevación */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.resena__avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.resena__texto {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.resena__autor {
+    font-weight: bold;
+    color: var(--secundario);
+    text-shadow: #212121;
+    /* Verde esmeralda */
+    font-family: 'Staatliches', sans-serif;
+    /* Para darle un toque único */
+    margin-top: 10px;
+}
+
+
 
 @media (min-width: 768px) {
     .grafico--node {
@@ -315,7 +385,7 @@ h3 {
 }
 
 .ubicacion__titulo {
-    font-size: 2rem;
+    font-size: 5rem;
     color: var(--secundario);
     margin-bottom: 1rem;
 }
@@ -340,4 +410,49 @@ h3 {
     border: 0;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/*formulario de contacto */
+.form-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-contacto label {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.form-contacto input,
+.form-contacto textarea {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-contacto button {
+    padding: 1rem;
+    background-color: var(--secundario);
+    /* Verde esmeralda */
+    font-family: var(--fuentePrincipal);
+    color: var(--negro);
+    font-size: 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-contacto button:hover {
+    background-color: #45a067;
+    /* Sombra más oscura del verde */
 }
