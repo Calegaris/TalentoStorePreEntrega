@@ -41,8 +41,8 @@
                     inventore a minus impedit! Consectetur ad voluptate placeat quibusdam, labore quam dolorum
                     perspiciatis, repudiandae neque, harum deserunt.</p>
 
-                <form class="formulario">
-                    <select class="formulario__campo">
+                <form class="formulario"> <!--los id para capturarlos con el JS-->
+                    <select id="talla" class="formulario__campo">
                         <option disabled selected>--Seleccionar Talla</option>
                         <option>XS (Extra Pequeño)</option>
                         <option>S (Pequeño)</option>
@@ -51,8 +51,9 @@
                         <option>XL (Extra Grande)</option>
                         <option>XXL (Doble Extra Grande)</option>
                     </select>
-                    <input class="formulario__campo" type="number" placeholder="Cantidad" min="1">
-                    <input class="formulario__submit" type="submit" value="Agregar al Carrito">
+                    <input id="cantidad" class="formulario__campo" type="number" placeholder="Cantidad" min="1">
+                    <!--id para cantidad para js-->
+                    <button id="agregar-carrito" class="formulario__submit" type="button">Agregar al Carrito</button>
                 </form>
             </div>
         </div>
@@ -61,6 +62,8 @@
     <footer class="footer">
         <p class="footer__texto">Pre Entrega, Calegari - Todos los derechos Reservados 2024</p>
     </footer>
+
+    <script src="js/script.js"></script>
 
 </body>
 
