@@ -236,6 +236,43 @@ h3 {
 
 }
 
+/* Estilos para los botones */
+button.ver-descripcion {
+    background-color: var(--secundario);
+    color: var(--negro);
+    border: none;
+    padding: 10px 20px;
+    font-family: var(--fuentePrincipal);
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button.ver-descripcion:hover {
+    background-color: var(--primario);
+    color: var(--blanco);
+}
+
+/* Estilos para la descripción ampliada */
+p.descripcion-ampliada {
+    font-family: var(--fuentePrincipal);
+    font-size: 14px;
+    color: var(--blanco);
+    margin-top: 10px;
+    line-height: 1.5;
+    display: none;
+}
+
+/* Estilo adicional para la estructura de los productos (opcional) */
+.producto {
+    border: 1px solid var(--primario);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 /** Reseñas **/
 .resenas {
     margin-top: 50px;
