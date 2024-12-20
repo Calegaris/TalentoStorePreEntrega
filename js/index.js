@@ -36,8 +36,17 @@ function mostrarProductos(productos) {
         const productoDiv = document.createElement('div');
         productoDiv.classList.add('producto');
 
+        /* productoDiv.innerHTML = `
+             <a href="${producto.enlace}">
+                 <img class="producto__imagen" src="${producto.imagen}" alt="${producto.nombre}">
+                 <h3 class="producto__nombre">${producto.nombre}</h3>
+                 <p class="producto__descripcion">$${producto.precio.toLocaleString()}</p>
+             </a>
+             <button class="ver-descripcion">Ver descripción completa</button>
+             <p class="descripcion-ampliada" style="display: none;">${producto.descripcionAmpliada}</p>
+         `;*/
         productoDiv.innerHTML = `
-            <a href="${producto.enlace}">
+             <a href="producto.html?id=${producto.nombre}">
                 <img class="producto__imagen" src="${producto.imagen}" alt="${producto.nombre}">
                 <h3 class="producto__nombre">${producto.nombre}</h3>
                 <p class="producto__descripcion">$${producto.precio.toLocaleString()}</p>
@@ -60,3 +69,45 @@ function mostrarProductos(productos) {
 
 // Llamamos la función para mostrar los productos
 mostrarProductos(productos);
+
+// Función para consumir la API y mostrar los datos
+async function cargarProductosAPI() {
+    const productosGrid = document.querySelector('.productos-grid');
+    const tasaConversion = 1200; // Tasa de conversión fija de USD a ARS (puedes actualizarla según sea necesario)
+
+    try {
+        // Fetch a la API pública
+        const respuesta = await fetch('https://fakestoreapi.com/products');
+        const productos = await respuesta.json();
+
+        // Limitar los productos a mostrar a 6
+        const productosLimitados = productos.slice(0, 4);
+
+        // Iterar sobre los productos limitados y crear las tarjetas
+        productosLimitados.forEach(producto => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+
+            // Convertir el precio a pesos
+            const precioEnPesos = (producto.price * tasaConversion).toFixed(2);
+
+            card.innerHTML = `
+                <img class="card__imagen" src="${producto.image}" alt="${producto.title}">
+                <div class="card__contenido">
+                    <h3 class="card__titulo">${producto.title}</h3>
+                    <p class="card__precio">$${precioEnPesos}</p>
+                    <button class="card__boton">Agregar al Carrito</button>
+                </div>
+            `;
+
+            // Agregar la tarjeta al grid
+            productosGrid.appendChild(card);
+        });
+    } catch (error) {
+        console.error('Error al cargar los productos de la API:', error);
+        productosGrid.innerHTML = `<p>Error al cargar los productos. Intenta nuevamente más tarde.</p>`;
+    }
+}
+
+// Llamar a la función después de que el DOM esté cargado
+document.addEventListener('DOMContentLoaded', cargarProductosAPI);
