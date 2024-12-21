@@ -4,6 +4,7 @@ fui considerando algo mas facil y hacer un diseño mas minimalista, luego consid
 de remeras ambientada en Talento Tech y la pagina de Buenos Aires por eso los colores, mas que nada queria tener algo presentable que cumpla con la funcion de tienda, espero poder lograr alguna de las ideas originales mas adelante
 Perdon por la demora en la entrega y gracias por la oportunidad de entregar pasado de tiempo.
 
+---------------------------------------------------------------------------------------------------------------------------------------------------
 
 #TalentoStore EntregaFinal
 
