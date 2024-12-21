@@ -28,6 +28,7 @@ productos.forEach((producto) => {
     console.log("----------------------------");
 });
 
+// Función para mostrar los productos (locales y de la API)
 function mostrarProductos(productos) {
     const contenedorProductos = document.querySelector('.productos__contenedor');
     contenedorProductos.innerHTML = ''; // Limpiar contenedor
@@ -36,32 +37,36 @@ function mostrarProductos(productos) {
         const productoDiv = document.createElement('div');
         productoDiv.classList.add('producto');
 
-        /* productoDiv.innerHTML = `
-             <a href="${producto.enlace}">
-                 <img class="producto__imagen" src="${producto.imagen}" alt="${producto.nombre}">
-                 <h3 class="producto__nombre">${producto.nombre}</h3>
-                 <p class="producto__descripcion">$${producto.precio.toLocaleString()}</p>
-             </a>
-             <button class="ver-descripcion">Ver descripción completa</button>
-             <p class="descripcion-ampliada" style="display: none;">${producto.descripcionAmpliada}</p>
-         `;*/
-        productoDiv.innerHTML = `
-             <a href="producto.html?id=${producto.nombre}">
-                <img class="producto__imagen" src="${producto.imagen}" alt="${producto.nombre}">
-                <h3 class="producto__nombre">${producto.nombre}</h3>
-                <p class="producto__descripcion">$${producto.precio.toLocaleString()}</p>
-            </a>
-            <button class="ver-descripcion">Ver descripción completa</button>
-            <p class="descripcion-ampliada" style="display: none;">${producto.descripcionAmpliada}</p>
-        `;
+        if (producto.enlace) {
+            // Productos locales (con descripción expandida)
+            productoDiv.innerHTML = `
+                <a href="producto.html?id=${producto.nombre}">
+                    <img class="producto__imagen" src="${producto.imagen}" alt="${producto.nombre}">
+                    <h3 class="producto__nombre">${producto.nombre}</h3>
+                    <p class="producto__descripcion">$${producto.precio.toLocaleString()}</p>
+                </a>
+                <button class="ver-descripcion">Ver descripción completa</button>
+                <p class="descripcion-ampliada" style="display: none;">${producto.descripcionAmpliada}</p>
+            `;
 
-        // Evento para mostrar la descripción ampliada
-        const botonDescripcion = productoDiv.querySelector('.ver-descripcion');
-        const descripcionAmpliada = productoDiv.querySelector('.descripcion-ampliada');
+            // Evento para mostrar la descripción ampliada
+            const botonDescripcion = productoDiv.querySelector('.ver-descripcion');
+            const descripcionAmpliada = productoDiv.querySelector('.descripcion-ampliada');
 
-        botonDescripcion.addEventListener('click', () => {
-            descripcionAmpliada.style.display = descripcionAmpliada.style.display === 'none' ? 'block' : 'none';
-        });
+            botonDescripcion.addEventListener('click', () => {
+                descripcionAmpliada.style.display = descripcionAmpliada.style.display === 'none' ? 'block' : 'none';
+            });
+        } else {
+            // Productos de la API (con botón "Próximamente disponible")
+            productoDiv.innerHTML = `
+                <a href="#">
+                    <img class="producto__imagen" src="${producto.image}" alt="${producto.title}">
+                    <h3 class="producto__nombre">${producto.title}</h3>
+                    <p class="producto__descripcion">$${producto.precio}</p>
+                </a>
+                <button class="proximamente">Próximamente disponible</button>
+            `;
+        }
 
         contenedorProductos.appendChild(productoDiv);
     });
@@ -70,7 +75,7 @@ function mostrarProductos(productos) {
 // Llamamos la función para mostrar los productos
 mostrarProductos(productos);
 
-// Función para consumir la API y mostrar los datos
+// Función para consumir la API y mostrar los productos
 async function cargarProductosAPI() {
     const productosGrid = document.querySelector('.productos-grid');
     const tasaConversion = 1200; // Tasa de conversión fija de USD a ARS (puedes actualizarla según sea necesario)
@@ -78,10 +83,10 @@ async function cargarProductosAPI() {
     try {
         // Fetch a la API pública
         const respuesta = await fetch('https://fakestoreapi.com/products');
-        const productos = await respuesta.json();
+        const productosAPI = await respuesta.json();
 
-        // Limitar los productos a mostrar a 6
-        const productosLimitados = productos.slice(0, 4);
+        // Limitar los productos a mostrar a 4
+        const productosLimitados = productosAPI.slice(0, 4);
 
         // Iterar sobre los productos limitados y crear las tarjetas
         productosLimitados.forEach(producto => {
@@ -96,7 +101,7 @@ async function cargarProductosAPI() {
                 <div class="card__contenido">
                     <h3 class="card__titulo">${producto.title}</h3>
                     <p class="card__precio">$${precioEnPesos}</p>
-                    <button class="card__boton">Agregar al Carrito</button>
+                    <button class="card__boton">Próximamente disponible</button>
                 </div>
             `;
 
